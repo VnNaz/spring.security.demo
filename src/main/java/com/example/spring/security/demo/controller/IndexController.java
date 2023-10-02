@@ -5,9 +5,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class IndexController {
-    @GetMapping("/")
+    @GetMapping(value = {"/", "index"})
     public String getIndex(){
         return "index";
+    }
+    @GetMapping("/meeting")
+    public String getMeeting(){
+        return "meeting";
+    }
+
+    @GetMapping("/login")
+    public String getLogin(){
+        return "login";
     }
 
 }
