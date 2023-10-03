@@ -6,9 +6,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
+<div class="container mt-5">
+    <small><div class="alert alert-danger" role="alert" th:if="${param.error}">
+        Invalid username or password.
+    </div></small>
+    <small><div class="alert alert-success" role="alert" th:if="${param.logout}">
+        You logout from system
+    </div></small>
     <form th:action="@{/authenticateTheUser}" method="post">
-        <div class="form-group mt-5">
+        <div class="form-group">
             <label for="exampleInputEmail1">Username</label>
             <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username" name="username">
         </div>

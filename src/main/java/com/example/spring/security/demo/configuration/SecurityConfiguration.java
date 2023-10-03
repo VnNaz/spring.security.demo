@@ -41,7 +41,9 @@ public class SecurityConfiguration {
 
         http
                 .authorizeHttpRequests( request -> request
+                        // get request to home and index is free
                         .requestMatchers("/", "index").permitAll()
+                        // but in other client must login
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         // if we want use default processing
