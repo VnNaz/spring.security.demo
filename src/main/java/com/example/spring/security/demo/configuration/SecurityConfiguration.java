@@ -11,7 +11,6 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
 public class SecurityConfiguration {
     @Bean
     public UserDetailsManager userDetailsManager() {
@@ -41,7 +40,9 @@ public class SecurityConfiguration {
 
         http
                 .authorizeHttpRequests( request -> request
+                        // get request to home and index is free
                         .requestMatchers("/", "index").permitAll()
+                        // but in other client must login
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         // if we want use default processing
@@ -50,7 +51,9 @@ public class SecurityConfiguration {
                         // the default login processing, provided by Spring
                         .loginProcessingUrl("/authenticateTheUser")
                         .permitAll())
-                .logout(logout -> logout.permitAll());
+                .logout(logout -> logout
+//                        .logoutSuccessUrl("/")
+                        .permitAll());
 
         return http.build();
     }
