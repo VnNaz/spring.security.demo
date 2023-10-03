@@ -1,7 +1,7 @@
 package com.example.spring.security.demo.domain;
 
+import com.example.spring.security.demo.enums.Authority;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,12 +10,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Role {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "name", nullable = false, unique = true)
-    private String name;
-    public Role(String name) {
-        this.name = name;
+    private Authority authority;
+    public Role(Authority authority) {
+        this.authority = authority;
     }
 }

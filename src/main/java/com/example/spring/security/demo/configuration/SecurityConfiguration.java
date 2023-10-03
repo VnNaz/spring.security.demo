@@ -50,6 +50,7 @@ public class SecurityConfiguration {
                         //.requestMatchers("/", "/index").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/manager/**").hasRole("MANAGER")
+                        .requestMatchers("/meeting").authenticated()
                         //.requestMatchers("/signup").permitAll()
                         // but in other client must login
                         //.anyRequest().authenticated())
