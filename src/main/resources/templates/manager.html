@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Manager</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-3">
+    <p>Hello, <span sec:authentication="name">Nam</span></p>
+    <p>ROLE: <span sec:authentication="principal.authorities">ADMIN</span></p>
+    <h3>This is MANAGER page !!</h3>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn btn-outline-primary" th:href="@{/logout}">Log out</button>
+    </form>
+</div>
+</body>
+</html>
