@@ -12,8 +12,8 @@
     <p>ROLE: <span sec:authentication="principal.authorities">ADMIN</span></p>
     <h3>This is meeting page !!</h3>
     <p>For employee only !</p>
-    <div sec:authorize="hasRole(T(com.example.spring.security.demo.enums.Authority).ADMIN)" class="mt-2"><a role="button" class="btn btn-outline-primary" th:href="@{/admin}">Admin page</a></div>
-    <div sec:authorize="hasRole(T(com.example.spring.security.demo.enums.Authority).MANAGER)" class="mt-2"><a role="button" class="btn btn-outline-primary" th:href="@{/manager}">Manager page</a></div>
+    <div sec:authorize="hasAuthority(T(com.example.spring.security.demo.enums.Authority).ADMIN)" class="mt-2"><a role="button" class="btn btn-outline-primary" th:href="@{/admin}">Admin page</a></div>
+    <div sec:authorize="hasAuthority(T(com.example.spring.security.demo.enums.Authority).MANAGER)" class="mt-2"><a role="button" class="btn btn-outline-primary" th:href="@{/manager}">Manager page</a></div>
     <form th:action="@{/logout}" method="post" class="mt-2">
         <button type="submit" class="btn btn-outline-primary">Log out</button>
     </form>
