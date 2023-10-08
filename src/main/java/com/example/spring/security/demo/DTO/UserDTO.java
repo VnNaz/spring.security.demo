@@ -1,6 +1,5 @@
-package com.example.spring.security.demo.model;
+package com.example.spring.security.demo.DTO;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -11,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class WebUser {
+public class UserDTO {
     @Size(min = 5, message = "username length required > 5 char/num")
     @NotBlank(message = "username cannot be empty")
     private String username;

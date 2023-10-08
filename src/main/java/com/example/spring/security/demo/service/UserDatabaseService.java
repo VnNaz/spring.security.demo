@@ -1,14 +1,13 @@
 package com.example.spring.security.demo.service;
 
-import com.example.spring.security.demo.domain.Role;
+import com.example.spring.security.demo.DTO.UserMapper;
 import com.example.spring.security.demo.domain.User;
 import com.example.spring.security.demo.enums.Authority;
-import com.example.spring.security.demo.model.WebUser;
+import com.example.spring.security.demo.DTO.UserDTO;
 import com.example.spring.security.demo.repository.RoleRepository;
 import com.example.spring.security.demo.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -17,28 +16,19 @@ import java.util.Arrays;
 public class UserDatabaseService {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
-    private PasswordEncoder passwordEncoder;
+    private UserMapper userMapper;
     @Autowired
-    public UserDatabaseService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public UserDatabaseService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
     }
     public User findUserByUsername(String username){
         return userRepository.findUserByUsername(username);
     }
-    @Transactional
-    public User saveUser(WebUser webUser){
+    @Transactional()
+    public User saveUser(UserDTO dto){
 
-        User user = new User();
-        // set id = 0 to force insert
-        user.setId(0);
-        user.setUsername(webUser.getUsername());
-        user.setPassword(passwordEncoder.encode(webUser.getPassword()));
-        user.setFirstName(webUser.getFirstName());
-        user.setLastName(webUser.getLastName());
-        user.setEmail(webUser.getEmail());
-        user.setEnabled(true);
+        User user = userMapper.toEntity(dto);
 
         user.setRoles(Arrays.asList(roleRepository.findRoleByAuthority(Authority.EMPLOYEE)));
 
